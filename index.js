@@ -1,68 +1,60 @@
 // const prompt = require('prompt-sync')({sigint:true})
-let any =["rock","paper","scissors"]
-const getRandom = ()=>{
-    let num = Math.floor(Math.random()*(any.length))
-    console.log(`the value is ${num}`)
-    return any[num]
-}
+const div = document.querySelectorAll(".div");
+div.forEach((e) => {
+  e.addEventListener("click", () => game(e.textContent));
+});
+const users = document.querySelector(".user");
+const computers = document.querySelector(".computer");
+
+let any = ["rock", "paper", "scissors"];
+const getRandom = () => {
+  let num = Math.floor(Math.random() * any.length);
+  console.log(`the value is ${num}`);
+  return any[num];
+};
 
 // const userSelection =prompt("what do you choose: ")
 
-let count =0
-let counter =0
-const game=(user)=>{
-    let val = true
-    while (val) {
-      user = prompt("what do you choose: ");
-      if (any.includes(user)) {
-        val = false;
-      }
-    }
-   computer = getRandom()
-    const value = user.toLowerCase();
-    console.log(` this is your value: ${user}`);
-    console.log(` this is your computer value: ${computer}`)
-    // console.log("1")
+let count = 0;
+let counter = 0;
+let plays = 0;
+const game = (user) => {
+  let node = document.createElement("p");
+  node = node.innerHTML = user;
+  users.textContent = user;
 
-     if(user===computer){
-        console.log("2");
-        return "Its a tie"
+  computer = getRandom();
+  computers.textContent = computer;
+  const value = user.toLowerCase();
+  console.log(` this is your value: ${user}`);
+  console.log(` this is your computer value: ${computer}`);
 
-    }
-    else if (value=="rock"&&computer=="scissors"){
-        count++
-    console.log("3");
-
-    }
-    else if (value=="paper" &&computer=="rock"){
-    console.log("4");
+  if (user === computer) {
+  } else if (value == "rock" && computer == "scissors") {
     count++;
-    }
-    else if(value=="scissors"&& computer=="paper"){
-    console.log("5");
+  } else if (value == "paper" && computer == "rock") {
     count++;
-    }
-    else{
-    console.log("6");
+  } else if (value == "scissors" && computer == "paper") {
+    count++;
+  } else {
     counter++;
-    }
-}
-const newfunc =()=>{
-    for(let i=0;i<5;i++){
-        game()
-    }
-    if (count===counter){
-        return "It's a tie"
-    }
-    else if(count>counter){
-        return "Congrats you've won"
-    }
-    else{
-        return "you lose"
-    }
+  }
+  newfunc();
+};
+const newfunc = () => {
+  if (counter + count >= 5) {
 
-}
-// console.log(newfunc())
-
-// document.addEventListener("load", game());
-
+    if (count === counter) {
+      console.log("It's a tie");
+    } else if (count > counter) {
+      alert("Congrats you've won");
+    } else {
+      alert("you lose");
+    }
+    alert("Game Over");
+    users.textContent=""
+    computers.textContent=""
+    count=0;
+    counter=0;
+  }
+};
